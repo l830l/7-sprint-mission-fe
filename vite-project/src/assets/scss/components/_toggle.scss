@@ -1,0 +1,19 @@
+.form-switch {
+  input,
+  label {
+    cursor: pointer;
+  }
+}
+.switch-area {
+  margin-top: 8px;
+  overflow: hidden;
+  transition: 0.5s all;
+  max-height: 0;
+
+  &.on {
+    max-height: 500px;
+  }
+  &.off {
+    max-height: 0;
+  }
+}

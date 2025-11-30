@@ -1,0 +1,75 @@
+/* -----------------------------------
+   Reset (Clean & Minimal)
+----------------------------------- */
+
+/* 기본 박스 사이징 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 기본 마진 제거 */
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+ul, ol,
+figure,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+/* 리스트 스타일 제거 */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 링크 기본 설정 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 이미지: 반응형 기본값 */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* 버튼, input 기본 스타일 제거 */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+/* 버튼 커서 */
+button {
+  cursor: pointer;
+}
+
+/* 테이블 기본 초기화 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* body 기본값 */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* strong 두껍게 유지 */
+strong {
+  font-weight: bold;
+}

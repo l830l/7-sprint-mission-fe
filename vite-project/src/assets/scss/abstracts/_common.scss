@@ -1,0 +1,57 @@
+html,
+body {
+  min-height: 360px;
+  height: 100%;
+}
+
+body {
+  background: $bg-outter-color;
+  color: $font-color;
+  font-family: "NotoSansKR";
+  font-weight: $font-weight-regular;
+  font-size: $font-size-md;
+}
+#root {
+  height: 100%;
+}
+
+.content-wrap {
+  height: 100%;
+  position: relative;
+  transition: 0.5s all;
+}
+
+.title-wrap {
+  display: flex;
+  align-items: center;
+  .title {
+    flex: 1 1 auto;
+  }
+  .ico-btns-wrap {
+    display: flex;
+  }
+}
+
+.btns-wrap {
+  display: flex;
+  gap: 8px;
+
+  .btn {
+    flex: 1 0 auto;
+    min-height: 48px;
+  }
+}
+
+.btns-wrap-virtical {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .btn {
+    flex: 1 0 auto;
+    min-height: 48px;
+  }
+}
+.highlight {
+  color: $sub-color;
+}

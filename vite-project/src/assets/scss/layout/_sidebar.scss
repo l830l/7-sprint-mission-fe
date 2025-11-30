@@ -1,0 +1,155 @@
+.content-wrap.open .btn.btn-menu {
+  color: #fff;
+  background: rgba(#000, 0.2);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: -1 * $side-w;
+  height: 100%;
+  width: $side-w;
+  padding: 0 16px;
+  background: $bg-dock-color;
+  border-right: 1px solid $input-border-color;
+  transition: 0.5s all;
+
+  .accordion-body {
+    padding: 0;
+  }
+
+  .count {
+    margin-left: 6px;
+    color: mix($main-color, #fff, 80%);
+  }
+
+  .no-content-txt {
+    border-radius: $border-radius;
+    padding: 24px 0;
+    margin-bottom: 24px;
+    background: rgba(#fff, 0.02);
+    color: rgba($font-color, 0.3);
+    text-align: center;
+  }
+}
+.content-wrap.open {
+  padding-left: $side-w;
+
+  .sidebar {
+    left: 0;
+  }
+}
+.logo-wrap {
+  padding-top: 12px;
+  padding-bottom: 8px;
+  img {
+    width: 110px;
+  }
+}
+.channel-list {
+  .channel-item {
+    width: 100%;
+    position: relative;
+    padding: 6px 0;
+    color: rgba($font-color, 0.5);
+    text-align: left;
+    transition: 0.3s all;
+
+    .channel-name {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -16px;
+      width: 0;
+      transition: 0.5s all;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        rgba($main-color, 0) 50%,
+        rgba($main-color, 0.2)
+      );
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      height: 0;
+      width: 2px;
+      background: rgba(#fff, 0.2);
+      transition: 0.3s all;
+    }
+
+    &:hover {
+      color: #fff;
+      &::before {
+        height: 100%;
+        top: 0;
+      }
+    }
+
+    &.selectedChannel {
+      color: $font-color;
+
+      &::after {
+        width: calc(100% + 32px); //내부 패딩
+      }
+
+      &::before {
+        height: 100%;
+        top: 0;
+        background: $main-color;
+      }
+    }
+  }
+
+  .info-wrap {
+    min-width: 0;
+  }
+}
+
+.private-list {
+  .channel-item {
+    display: flex;
+    gap: 12px;
+    line-height: 1.8;
+  }
+  .profile-wrap {
+    margin-top: 8px;
+    width: 36px;
+    height: 36px;
+  }
+  .names,
+  .member-count {
+    font-size: $font-size-sm;
+  }
+  .manager-name {
+    margin-top: -10px;
+  }
+  .channel-name {
+    color: rgba($font-color, 0.15);
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: $font-size-xs;
+  }
+  .member-item {
+    display: inline-block;
+    padding: 0 4px;
+    border-radius: 4px;
+    margin-right: 4px;
+    background: rgba(#000, 0.2);
+    font-size: $font-size-xs;
+  }
+}

@@ -1,0 +1,89 @@
+.btn {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: $border-radius;
+  transition: 0.3s all;
+  padding: 6px 12px;
+
+  &-primary {
+    background: linear-gradient(120deg, $main-color-gra, $main-color);
+    border: $main-color;
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba($main-color, 0.5);
+      background: linear-gradient(
+        120deg,
+        lighten($main-color-gra, 1%),
+        lighten($main-color, 1%)
+      );
+    }
+  }
+
+  &-success {
+    background: linear-gradient(120deg, $sub-color, $sub-color-gra);
+  }
+
+  &.btn-dark {
+    &:hover {
+      border: 1px solid mix(#212529, #000, 90%);
+      background: mix(#212529, #000, 90%);
+      color: #fff;
+    }
+    &:active {
+      border: 1px solid mix(#212529, #000, 50%);
+      background: mix(#212529, #000, 50%);
+      color: #fff;
+    }
+  }
+
+  &.btn-ico-only {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 1000px;
+    color: rgba(#fff, 0.5);
+    font-size: 18px;
+    transition: all 0.3s;
+
+    &:hover {
+      background: rgba(#fff, 0.05);
+      color: #fff;
+    }
+
+    &:active {
+      background: rgba(#000, 0.1);
+      border: 1px solid rgba(#000, 0.1);
+    }
+  }
+  &.btn-ico-only.ico-btn-sm {
+    width: 32px;
+    height: 32px;
+    font-size: $font-size-md;
+  }
+  &.btn-ico-only.danger {
+    color: rgba($danger-color, 0.8);
+
+    &:hover {
+      background: rgba($danger-color, 0.1);
+      color: $danger-color;
+    }
+
+    &:active {
+      background: rgba($danger-color, 0.2);
+      border: 1px solid rgba($danger-color, 0.2);
+    }
+  }
+
+  &.btn-sm {
+    min-height: auto;
+    border-radius: 6px;
+    padding: 4px;
+    font-size: $font-size-xs;
+    color: rgba($font-color, 0.6);
+  }
+}

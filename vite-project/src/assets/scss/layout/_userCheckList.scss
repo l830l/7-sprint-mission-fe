@@ -1,0 +1,18 @@
+.user-list {
+  margin-bottom: 20px;
+  .no-content {
+    text-align: center;
+    padding: 24px 0 48px;
+  }
+  .list-group-item {
+    cursor: pointer;
+    transition: 0.3s all;
+
+    &:hover {
+      background: rgba(#fff, 0.05);
+    }
+    &:active {
+      background: rgba(#000, 0.25);
+    }
+  }
+}

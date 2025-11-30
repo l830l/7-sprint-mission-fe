@@ -1,0 +1,250 @@
+.chat-content-area {
+  display: flex;
+}
+.message-content-area {
+  flex: 1 1 auto;
+}
+.message-list-area {
+  height: calc(100vh - $header-h - 48px); //input-h : 48px;
+  min-height: calc(360px - $header-h - 48px);
+  padding: 16px 16px 24px; //1px : margin-bug-fix
+  overflow: auto;
+
+  .no-content-txt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: $font-size-xl;
+    text-align: center;
+    opacity: 0.2;
+  }
+}
+.date-divider {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 48px 0 24px;
+  border-radius: $border-radius;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: rgba($font-color, 0.5);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    width: 100%;
+    background: #fff;
+    opacity: 0.1;
+  }
+
+  .txt {
+    position: relative;
+    display: inline-block;
+    padding: 0 16px;
+    background: $bg-outter-color;
+    z-index: 1;
+  }
+}
+.message-bubble {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  .profile-wrap {
+    width: 32px;
+    height: 32px;
+  }
+  .speaker {
+    font-size: $font-size-sm;
+  }
+  .sub-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2px;
+    font-size: $font-size-xs;
+    opacity: 0.5;
+    //align-items: flex-end;
+  }
+
+  .bubble-content-wrap {
+    max-width: 480px;
+
+    border-radius: 0 $border-radius $border-radius $border-radius;
+    padding: 8px 16px;
+    background: rgba($bg-dock-color, 0.5);
+  }
+
+  .attachments {
+    display: flex;
+    gap: 8px;
+  }
+  .attachment-image {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 12px 0;
+    overflow: hidden;
+    border-radius: $border-radius;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .attachment-download {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 1000px;
+      background: rgba(#000, 0.5);
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      font-size: 16px;
+      line-height: 1;
+      transition: 0.3s all;
+    }
+    .attachment-download:hover {
+      width: 32px;
+      height: 32px;
+      bottom: 2px;
+      right: 2px;
+      background: rgba(#000, 0.75);
+    }
+    .attachment-download:active {
+      background: rgba(#000, 1);
+    }
+    .attachment-download i {
+      margin-top: -3px;
+    }
+  }
+}
+.my-bubble {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+
+  .profile-wrap {
+    display: none;
+  }
+  .speaker {
+    display: none;
+  }
+
+  .bubble-content-wrap {
+    border: 1px solid $main-color;
+    border-radius: $border-radius 0 $border-radius $border-radius;
+    background: linear-gradient(120deg, $main-color-gra, $main-color);
+    text-shadow: 0 0 2px rgba(#000, 0.3);
+  }
+}
+.message-input-area {
+  display: flex;
+  position: relative;
+
+  .btn-add-attachment {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+  }
+
+  .form-control {
+    padding-left: 48px;
+    border-radius: 0;
+    color: $font-color;
+    font-weight: $font-weight-regular;
+
+    &::placeholder {
+      color: rgba($font-color, 0.5);
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  .btn-msg-send {
+    border-radius: 0;
+    background: linear-gradient(120deg, $main-color-gra, $main-color);
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba($main-color, 0.5);
+      background: linear-gradient(
+        120deg,
+        lighten($main-color-gra, 1%),
+        lighten($main-color, 1%)
+      );
+    }
+
+    &:active {
+      box-shadow: 0 2px 8px rgba($main-color, 0.5);
+      background: linear-gradient(
+        120deg,
+        darken($main-color-gra, 1%),
+        darken($main-color, 1%)
+      );
+    }
+  }
+  .attachment-area {
+    position: absolute;
+    bottom: 100%;
+    width: 100%;
+
+    .attachments-preview {
+      display: flex;
+      width: 100%;
+      padding: 10px;
+      justify-content: center;
+      background: rgba(#000, 0.5);
+    }
+    .attachments-preview img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+    .button-wrap {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      background: rgba(#000, 0.6);
+      border-radius: 20px;
+    }
+  }
+}
+
+.member-list-area {
+  height: calc(100vh - $header-h);
+  min-height: calc(360px - $header-h);
+  width: 240px;
+  padding: 16px;
+  border-top: 1px solid #32333d;
+  border-left: 1px solid #32333d;
+  overflow-y: auto;
+  background: $bg-dock-color;
+
+  .title {
+    font-size: $font-size-xs;
+  }
+  .user-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 0;
+
+    .profile-wrap {
+      width: 30px;
+      height: 30px;
+    }
+
+    &.manager .nickname::after {
+      content: "(방장)";
+      display: inline-block;
+      margin-left: 6px;
+      opacity: 0.5;
+    }
+  }
+}

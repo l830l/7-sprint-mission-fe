@@ -1,0 +1,17 @@
+.nav-tabs {
+  display: flex;
+
+  .nav-item {
+    flex: 1 1 auto;
+
+    button {
+      width: 100%;
+      color: $font-color;
+    }
+
+    .active {
+      color: lighten($main-color, 1%);
+      font-weight: $font-weight-medium;
+    }
+  }
+}

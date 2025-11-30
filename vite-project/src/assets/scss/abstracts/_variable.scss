@@ -1,0 +1,58 @@
+@use "sass:color";
+
+//layout
+$header-h: 48px;
+$padding: 24px;
+$side-w: 240px;
+
+//color
+$main-color: #5765f2;
+$main-color-gra: #7f70fd;
+
+$light-main-color: color.mix(#fff, $main-color, 30%);
+$sub-color: #43b581;
+$sub-color-gra: #01a4b7;
+$danger-color: #d7524d;
+$bg-inner-color: #17171c;
+$bg-dock-color: #2c2c35;
+$bg-input-color: #292a33;
+$bg-outter-color: #111012;
+$input-border-color: #32333d;
+
+$font-color: #ffffff;
+$font-color-soft: #909090;
+
+$dock-radius: 12px;
+$border-radius: 8px;
+
+//font
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 24px;
+$font-size-xl: 32px;
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("/font/NotoSansKR-DemiLight-Hestia.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("/font/NotoSansKR-Medium-Hestia.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("/font/NotoSansKR-Bold-Hestia.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+$font-weight-regular: 300;
+$font-weight-medium: 500;
+$font-weight-bold: 700;

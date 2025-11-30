@@ -1,0 +1,50 @@
+.infobox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+}
+.profile-wrap {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 1000px;
+  border: 1px solid rgba(#fff, 0.05);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.info-text-area {
+  flex: 1 1 auto;
+  min-width: 0; /* 내용이 길어도 부모 안에서 줄어들게 */
+  max-width: 100%; /* 부모보다 커지지 않음 */
+
+  .nickname {
+    display: block;
+    font-size: $font-size-sm;
+    word-break: break-all;
+  }
+  .email {
+    display: block;
+    overflow: hidden;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-xs;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: 0.5;
+  }
+
+  .btns-wrap {
+    gap: 4px;
+    padding-top: 8px;
+    margin-left: -2px;
+  }
+}
