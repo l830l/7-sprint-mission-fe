@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProfileImg } from "../../utils/profile";
+import { getImg } from "../../utils/profile";
 import apiClient from "../../api/client";
 import { formatKoreanTime } from "../../utils/format_time";
 
@@ -9,7 +9,6 @@ const MessageBubble = ({ message, currentUser }) => {
 
   useEffect(() => {
     if (!message) return;
-
     apiClient
       .get(`/api/users/${message.speakerId}`)
       .then((res) => setSpeaker(res.data))
@@ -17,10 +16,10 @@ const MessageBubble = ({ message, currentUser }) => {
   }, [message]);
 
   const renderAttachment = (att, idx) => {
-    if (!att.data) return null;
+    if (!att) return null;
 
     const isImage = att.fileType?.startsWith("image/");
-    const blobUrl = `data:${att.fileType};base64,${att.data}`;
+    const blobUrl = getImg(att);
 
     if (isImage) {
       return (
@@ -49,7 +48,7 @@ const MessageBubble = ({ message, currentUser }) => {
   return (
     <div className={`message-bubble ${isMine ? "my-bubble" : ""}`}>
       <div className="profile-wrap">
-        <img src={getProfileImg(speaker?.profileImg)} alt="프로필사진" />
+        <img src={getImg(speaker?.profileImg)} alt="프로필사진" />
       </div>
       <div className="message-content">
         <p className="speaker">{speaker?.nickname}</p>

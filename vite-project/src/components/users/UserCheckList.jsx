@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../../api/client";
 import Input from "../ui/Input";
 import IcoButton from "../ui/IcoButton";
-import { getProfileImg } from "../../utils/profile";
+import { getImg } from "../../utils/profile";
 import { highlightText } from "../../utils/highlight_text";
 
 const UserCheckList = ({ selectedIds = [], mineId, onChange }) => {
@@ -56,7 +56,7 @@ const UserCheckList = ({ selectedIds = [], mineId, onChange }) => {
             id="search"
             value={search}
             setValue={setSearch}
-            placeholder={"유저 이메일 또는 닉네임 검색"}
+            placeholder={"초대할 유저 이메일 또는 닉네임 검색"}
           />
           <label htmlFor="search" className="visually-hidden">
             검색어 입력
@@ -77,7 +77,7 @@ const UserCheckList = ({ selectedIds = [], mineId, onChange }) => {
               >
                 {/* 프로필 이미지 */}
                 <img
-                  src={getProfileImg(user.profileImg)}
+                  src={getImg(user.profileImg)}
                   alt="profile"
                   className="rounded-circle"
                   width="40"

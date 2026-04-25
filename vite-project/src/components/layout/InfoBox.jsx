@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import UserModifyModal from "../modal/UserModifyModal";
-import { getProfileImg } from "../../utils/profile";
+import { getImg } from "../../utils/profile";
 import { useUserState } from "../../context/user/UserStateContext";
 import { useNavigate } from "react-router-dom";
 import { useUserDispatch } from "../../context/user/UserDispatchContext";
@@ -28,7 +28,7 @@ const InfoBox = () => {
     <>
       <div className="infobox">
         <div className="profile-wrap">
-          <img src={getProfileImg(user?.profileImg)} alt="프로필 이미지" />
+          <img src={getImg(user?.profileImg)} alt="프로필 이미지" />
         </div>
         <div className="info-text-area">
           <span className="nickname">{user?.nickname}</span>

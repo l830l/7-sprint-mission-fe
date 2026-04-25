@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import Button from "../ui/Button";
 import EmailAuth from "../auth/EmailChk";
@@ -48,6 +48,9 @@ const FindId = () => {
     <>
       <div className="login-page">
         <div className="login-box">
+          <Link to="/login" className="btn btn-back btn-ico-only btn-lg" aria-label="로그인 페이지로 이동">
+            <i className="bi bi-arrow-left"></i>
+          </Link>
           <div className="login-title">
             <span className="text-area">
               <span className="title">아이디 찾기</span>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import apiClient from "../../api/client";
-import { getProfileImg } from "../../utils/profile";
+import { getImg } from "../../utils/profile";
 import { useChannelDispatch } from "../../context/channel/ChannelDispatchContext";
 import { useChannelState } from "../../context/channel/ChannelStateContext";
 import { highlightText } from "../../utils/highlight_text";
@@ -9,25 +9,28 @@ import { highlightText } from "../../utils/highlight_text";
 const PrivateChannelList = ({ privateList, searchTxt }) => {
   const [count, setCount] = useState(0);
   const [membersMap, setMembersMap] = useState({}); // userId → user info
-  const [managerMap, setManagerMap] = useState({}); // managerId → user info
+
   const { selectedChannel } = useChannelState();
   const { selectChannel } = useChannelDispatch();
 
   useEffect(() => {
-    setCount(privateList?.length);
+    setCount(privateList?.length ?? 0);
 
-    if (!privateList || privateList.length === 0) return;
+    if (!privateList || privateList.length === 0) {
+      setMembersMap({});
+      return;
+    }
 
-    // userId와 managerId를 모두 수집 (중복 제거)
+    // 모든 채널에서 필요한 userId 수집 (중복 제거)
     const allUserIds = Array.from(
-      new Set([
-        ...privateList.flatMap((ch) => ch.userIds),
-        ...privateList.map((ch) => ch.managerId),
-      ])
+      new Set(
+        privateList.flatMap((ch) => [
+          ch.managerId,
+          ...(ch.userIds || []),
+        ])
+      )
     );
 
-    // 모든 userId 요청
-    // 모든 userId 요청
     Promise.all(
       allUserIds.map((userId) =>
         apiClient.get(`/api/users/${userId}`).then((res) => ({
@@ -36,18 +39,13 @@ const PrivateChannelList = ({ privateList, searchTxt }) => {
         }))
       )
     ).then((results) => {
-      const memberMap = {};
-      const mgrMap = {};
-      results.forEach((r) => {
-        // 각 채널의 managerId와 userIds에 따라 구분
-        if (privateList.some((ch) => ch.managerId === r.userId)) {
-          mgrMap[r.userId] = r.data;
-        } else {
-          memberMap[r.userId] = r.data;
-        }
+      const userMap = {};
+
+      results.forEach(({ userId, data }) => {
+        userMap[userId] = data;
       });
-      setMembersMap(memberMap);
-      setManagerMap(mgrMap);
+
+      setMembersMap(userMap);
     });
   }, [privateList]);
 
@@ -60,14 +58,18 @@ const PrivateChannelList = ({ privateList, searchTxt }) => {
             <span className="count">{count}</span>
           </span>
         </Accordion.Header>
+
         <Accordion.Body>
           <div className="channel-list private-list">
             {privateList && privateList.length > 0 ? (
               privateList.map((ch) => {
-                const manager = managerMap[ch.managerId];
-                const members = ch.userIds
+                const manager = membersMap[ch.managerId];
+
+                const memberNicknames = ch.userIds
+                  ?.filter((id) => id !== ch.managerId) // 방장 제외
                   .map((id) => membersMap[id])
-                  .filter(Boolean);
+                  .filter(Boolean)
+                  .map((user) => user.nickname);
 
                 return (
                   <button
@@ -80,21 +82,23 @@ const PrivateChannelList = ({ privateList, searchTxt }) => {
                     }
                     onClick={() => selectChannel(ch)}
                   >
-                    {/* 방장 프로필 이미지 */}
+                    {/* 방장 프로필 */}
                     <div className="profile-wrap">
                       {manager && (
                         <img
-                          src={getProfileImg(manager?.profileImg)}
+                          src={getImg(manager.profileImg)}
                           alt={manager.nickname}
                           className="profile-thumb"
                         />
                       )}
                     </div>
+
                     <div className="info-wrap">
                       {/* 방 이름 */}
                       <div className="channel-name">
-                        {highlightText(ch.channelName, searchTxt)}
+                        {highlightText(ch.name, searchTxt)}
                       </div>
+
                       {/* 방장 이름 */}
                       <div className="manager-name">
                         {manager && <>방장: {manager.nickname}</>}
@@ -102,13 +106,9 @@ const PrivateChannelList = ({ privateList, searchTxt }) => {
 
                       {/* 멤버 닉네임 목록 */}
                       <div className="names">
-                        {members.length > 0
-                          ? members.map((m, i) => (
-                              <span key={m.userId || i} className="member-item">
-                                {m.nickname}
-                              </span>
-                            ))
-                          : "멤버 없음"}
+                        {memberNicknames?.length > 0
+                          ? memberNicknames.join(", ")
+                          : "참가 멤버 없음"}
                       </div>
                     </div>
                   </button>
