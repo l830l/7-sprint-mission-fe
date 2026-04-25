@@ -34,11 +34,17 @@
   }
 }
 .login-box {
+  position: relative;
   max-width: 400px;
   width: 100%;
   background: $bg-inner-color;
   border-radius: $dock-radius;
   padding: 60px 32px;
+  .btn-back{
+    position:absolute;
+    top:0px;
+    left:-56px;
+  }
 
   .login-title {
     display: flex;

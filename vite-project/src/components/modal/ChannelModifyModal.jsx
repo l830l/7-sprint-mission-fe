@@ -65,7 +65,7 @@ const ChannelModifyModal = ({ show, onClose }) => {
       >
         <form action="" method="post">
           <Modal.Header closeButton>
-            <Modal.Title>유저 정보 수정</Modal.Title>
+            <Modal.Title>채널 정보 수정</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="form-group floating-label">

@@ -28,6 +28,7 @@ const MessageInputArea = ({ loadMessage }) => {
 
   const sendMessage = async () => {
     if (!inputMsg.trim() && attachments.length === 0) return;
+    if (!selectedChannel) alert("채널을 먼저 생성해주세요");
 
     try {
       const formData = new FormData();
@@ -35,10 +36,10 @@ const MessageInputArea = ({ loadMessage }) => {
         "messageInfoReq",
         new Blob([JSON.stringify({ content: inputMsg })], {
           type: "application/json",
-        })
+        }),
       );
       attachments.forEach(({ file }) =>
-        formData.append("attachmentFiles", file)
+        formData.append("attachmentFiles", file),
       );
 
       await apiClient.post("/api/messages", formData, {

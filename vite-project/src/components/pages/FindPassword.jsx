@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { validateForm } from "../../utils/validation";
 
 import Input from "../ui/Input";
@@ -53,6 +53,9 @@ const FindPassword = () => {
       <div className="login-page">
         <div className="login-box">
           <div className="login-title">
+            <Link to="/login" className="btn btn-back btn-ico-only btn-lg" aria-label="로그인 페이지로 이동">
+              <i className="bi bi-arrow-left"></i>
+            </Link>
             <span className="text-area">
               <span className="title">비밀번호 찾기</span>
               <span className="descript">

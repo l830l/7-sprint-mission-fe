@@ -1,4 +1,4 @@
-export const getProfileImg = (profileImg) => {
-    if (!profileImg || !profileImg.data) return "/images/default-avatar.svg";
-    return `data:image/jpeg;base64,${profileImg.data}`;
-  };
+export const getImg = (profileImg) => {
+  if (!profileImg || !profileImg.binaryContentId) return "/images/default-avatar.svg";
+  return `http://localhost:8080/api/binary-contents/${profileImg.binaryContentId}`;
+};

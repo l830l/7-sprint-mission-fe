@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../../api/client";
-import { getProfileImg } from "../../utils/profile";
+import { getImg } from "../../utils/profile";
 
 const MemberItem = ({ userId, isManager }) => {
   const [user, setUser] = useState(null);
@@ -18,7 +18,7 @@ const MemberItem = ({ userId, isManager }) => {
     <>
       <div className={`user-item ${isManager ? "manager" : ""}`}>
         <div className="profile-wrap">
-          <img src={getProfileImg(user?.profileImg)} alt="" />
+          <img src={getImg(user?.profileImg)} alt="" />
         </div>
         <div className="user-info">
           <p className="nickname">{user?.nickname}</p>

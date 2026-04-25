@@ -5,7 +5,7 @@ import EmailAuth from "../auth/EmailChk";
 import { validateForm, validateInputs } from "../../utils/validation";
 import apiClient from "../../api/client";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const SignUp = () => {
   const [profileImg, setProfileImg] = useState(null);
@@ -114,6 +114,9 @@ const SignUp = () => {
       <div className="login-page">
         <div className="login-box">
           <div className="login-title">
+            <Link to="/login" className="btn btn-back btn-ico-only btn-lg" aria-label="로그인 페이지로 이동">
+              <i className="bi bi-arrow-left"></i>
+            </Link>
             <span className="text-area">
               <span className="title">회원가입</span>
             </span>
