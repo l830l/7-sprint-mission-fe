@@ -37,7 +37,6 @@ const Login = ({ setIsLoggedIn }) => {
       .then((res) => {
         const { data } = res;
 
-        sessionStorage.setItem("user", JSON.stringify(data));
         setUser(data);
         setIsLoggedIn(true);
         navigate("/chatroom");

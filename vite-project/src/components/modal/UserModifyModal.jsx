@@ -28,7 +28,6 @@ const UserModifyModal = ({ show, onClose }) => {
   const [isReplacePassword, setIsReplacePassword] = useState(false);
 
   useEffect(() => {
-    console.log(user);
     if (show) {
       setNickName(user?.nickname ?? "");
       setPassword(user?.password ?? "");
@@ -160,7 +159,6 @@ const UserModifyModal = ({ show, onClose }) => {
       })
       .then((res) => {
         alert("수정이 완료되었습니다.");
-        sessionStorage.setItem("user", JSON.stringify(res.data));
         setUser(res.data);
         onClose();
       })
@@ -181,7 +179,6 @@ const UserModifyModal = ({ show, onClose }) => {
       apiClient
         .delete("/api/users/" + user?.userId)
         .then((res) => {
-          sessionStorage.removeItem("user");
           setUser(null);
           navigate("/login");
         })
