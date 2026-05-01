@@ -28,27 +28,18 @@ const UserModifyModal = ({ show, onClose }) => {
   const [isReplacePassword, setIsReplacePassword] = useState(false);
 
   useEffect(() => {
+    console.log(user);
     if (show) {
       setNickName(user?.nickname ?? "");
       setPassword(user?.password ?? "");
       setIsReplaceEmail(false);
       setIsReplacePassword(false);
+     
+      const imageId = user?.profileImg?.binaryContentId;
       setPreviewImg(
-        user?.profileImg?.data
-          ? `data:image/jpeg;base64,${user?.profileImg.data}`
-          : null
+        imageId ? `${import.meta.env.VITE_API_BASE_URL}/api/binary-contents/${imageId}` : null
       );
-      // Base64 → File 변환
-      if (user?.profileImg?.data) {
-        const file = base64ToFile(
-          user?.profileImg.data,
-          "profile.jpg",
-          "image/jpeg"
-        );
-        setProfileImg(file);
-      } else {
-        setProfileImg(null);
-      }
+      setProfileImg(null);
     }
   }, [show, user]);
 
