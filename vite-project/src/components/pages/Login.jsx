@@ -7,10 +7,12 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 
 import { validateForm } from "../../utils/validation";
+import CheckBox from "../ui/Checkbox";
 
 const Login = ({ setIsLoggedIn }) => {
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
   const navigate = useNavigate();
   const setUser = useUserDispatch();
 
@@ -27,6 +29,7 @@ const Login = ({ setIsLoggedIn }) => {
     const formData = new URLSearchParams();
     formData.append("nickname", nickname);
     formData.append("password", password);
+    formData.append("rememberMe", rememberMe);
 
     apiClient
       .post("/api/auth/login", formData, {
@@ -51,6 +54,7 @@ const Login = ({ setIsLoggedIn }) => {
         );
       });
   };
+
 
   return (
     <>
@@ -88,6 +92,9 @@ const Login = ({ setIsLoggedIn }) => {
                   }}
                 />
                 <label htmlFor="password">비밀번호</label>
+              </div>
+              <div className="form-group">
+                <CheckBox id="rememberMe" text="로그인 유지" checked={rememberMe} onChange={setRememberMe}/>
               </div>
               <div className="btns-wrap-virtical">
                 <Button

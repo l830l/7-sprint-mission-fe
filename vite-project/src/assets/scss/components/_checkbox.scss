@@ -1,0 +1,63 @@
+.custom-checkbox-input{
+    display: none;
+}
+.custom-checkbox {
+    position: relative;
+    padding-left: 24px;
+    font-size: $font-size-sm;
+    color: rgba($font-color, 0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &::before{
+        content:'';
+        position: absolute;
+        left:0;
+        top:50%;
+        width:16px;
+        height:16px;
+        border:1px solid $input-border-color;
+        border-radius: 2px;
+        background: $bg-input-color;
+        transform: translate(0, -50%);
+        transition: all 0.2s;
+    }
+
+    &::after{
+        content: "\f26e";
+        position: absolute;
+        left:-2px;
+        top:50%;
+        transform: translate(0, -50%);
+        font-family: bootstrap-icons !important;
+        font-style: normal;
+        font-size:20px;
+        font-weight: 400 !important;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        vertical-align: -.125em;
+        -webkit-font-smoothing: antialiased;
+        opacity: 0;
+        transition: all 0.2s;
+    }
+}
+
+.custom-checkbox:hover{
+    color: rgba($font-color, 0.9);
+
+    &::before{
+        background: rgba($sub-color, 0.1);
+        border: 1px solid rgba($sub-color, 0.2);
+    }
+}
+.custom-checkbox-input:checked ~ .custom-checkbox{
+    &::before{
+        background: $sub-color;
+        border: 1px solid $sub-color;
+    }
+
+    &::after{
+        opacity: 1;
+    }
+}
