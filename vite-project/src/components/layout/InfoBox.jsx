@@ -6,6 +6,7 @@ import { getImg } from "../../utils/profile";
 import { useUserState } from "../../context/user/UserStateContext";
 import { useNavigate } from "react-router-dom";
 import { useUserDispatch } from "../../context/user/UserDispatchContext";
+import apiClient from "../../api/client";
 
 const InfoBox = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,11 +18,19 @@ const InfoBox = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    if (confirm("정말 로그아웃 하시겠습니까?")) {
-      sessionStorage.removeItem(user);
+    if (!confirm("정말 로그아웃 하시겠습니까?")) return
+      
+    apiClient.post("/api/auth/logout", null, {
+       withCredentials: true
+    })
+    .then(res => {
       setUser(null);
       navigate("/login");
-    }
+    })
+    .catch(err => {
+        console.err(err);
+        alert("로그아웃에 실패하였습니다");
+    })
   };
 
   return (

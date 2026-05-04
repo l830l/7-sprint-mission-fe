@@ -4,9 +4,14 @@ import CONFIG from "../config";
 const api = axios.create({
   baseURL: CONFIG.API_BASE_URL,
   timeout: 5000,
+  withCredentials: true, // 쿠키 전송 허용
+  withXSRFToken: true,
+
+  xsrfCookieName: 'XSRF-TOKEN', // CSRF 토큰 쿠키 이름
+  xsrfHeaderName: 'X-XSRF-TOKEN', // CSRF 토큰 헤더 이름
   headers: {
     'Content-Type': 'application/json',   // 기본값 명시
-  },      
+  },
 });
 
 // 요청 인터셉터

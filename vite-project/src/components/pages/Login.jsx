@@ -1,16 +1,20 @@
 import apiClient from "../../api/client";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useUserDispatch } from "../../context/user/UserDispatchContext";
 
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 
 import { validateForm } from "../../utils/validation";
+import CheckBox from "../ui/Checkbox";
 
 const Login = ({ setIsLoggedIn }) => {
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
   const navigate = useNavigate();
+  const setUser = useUserDispatch();
 
   //이 페이지로 오면 로그인 상태를 false 로 만듬
   useEffect(() => {
@@ -22,21 +26,27 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
     if (!validateForm(e)) return; // 공통 validation 사용
 
+    const formData = new URLSearchParams();
+    formData.append("nickname", nickname);
+    formData.append("password", password);
+    formData.append("rememberMe", rememberMe);
+
     apiClient
-      .post("/api/auth/login", {
-        nickname,
-        password,
+      .post("/api/auth/login", formData, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
       })
       .then((res) => {
         const { data } = res;
-        sessionStorage.setItem("user", JSON.stringify(data));
+
+        setUser(data);
         setIsLoggedIn(true);
         navigate("/chatroom");
       })
       .catch((err) => {
         const messages = {
-          AUTH_001: "해당 닉네임의 유저가 존재하지 않습니다.",
-          AUTH_002: "비밀번호가 올바르지 않습니다.",
+          AUTH_001: "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.",
         };
         alert(
           messages[err.response.data.code] ||
@@ -44,6 +54,7 @@ const Login = ({ setIsLoggedIn }) => {
         );
       });
   };
+
 
   return (
     <>
@@ -81,6 +92,9 @@ const Login = ({ setIsLoggedIn }) => {
                   }}
                 />
                 <label htmlFor="password">비밀번호</label>
+              </div>
+              <div className="form-group">
+                <CheckBox id="rememberMe" text="로그인 유지" checked={rememberMe} onChange={setRememberMe}/>
               </div>
               <div className="btns-wrap-virtical">
                 <Button

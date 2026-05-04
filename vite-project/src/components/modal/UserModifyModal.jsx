@@ -33,22 +33,12 @@ const UserModifyModal = ({ show, onClose }) => {
       setPassword(user?.password ?? "");
       setIsReplaceEmail(false);
       setIsReplacePassword(false);
+     
+      const imageId = user?.profileImg?.binaryContentId;
       setPreviewImg(
-        user?.profileImg?.data
-          ? `data:image/jpeg;base64,${user?.profileImg.data}`
-          : null
+        imageId ? `${import.meta.env.VITE_API_BASE_URL}/api/binary-contents/${imageId}` : null
       );
-      // Base64 → File 변환
-      if (user?.profileImg?.data) {
-        const file = base64ToFile(
-          user?.profileImg.data,
-          "profile.jpg",
-          "image/jpeg"
-        );
-        setProfileImg(file);
-      } else {
-        setProfileImg(null);
-      }
+      setProfileImg(null);
     }
   }, [show, user]);
 
@@ -169,7 +159,6 @@ const UserModifyModal = ({ show, onClose }) => {
       })
       .then((res) => {
         alert("수정이 완료되었습니다.");
-        sessionStorage.setItem("user", JSON.stringify(res.data));
         setUser(res.data);
         onClose();
       })
@@ -190,7 +179,6 @@ const UserModifyModal = ({ show, onClose }) => {
       apiClient
         .delete("/api/users/" + user?.userId)
         .then((res) => {
-          sessionStorage.removeItem("user");
           setUser(null);
           navigate("/login");
         })

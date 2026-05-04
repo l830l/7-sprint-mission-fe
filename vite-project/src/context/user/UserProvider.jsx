@@ -1,18 +1,32 @@
 // src/contexts/user/UserProvider.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UserStateContext } from "./UserStateContext";
 import { UserDispatchContext } from "./UserDispatchContext";
+import apiClient from "../../api/client";
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const stored = sessionStorage.getItem("user");
-    return stored ? JSON.parse(stored) : null;
-  });
+  const [user, setUser] = useState(null);
+  const [isUserLoading, setIsUserLoading] = useState(true);
+
+  useEffect(() => {
+    apiClient
+      .get("/api/auth/me")
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch(() => {
+        setUser(null);
+      })
+      .finally(() => {
+        setIsUserLoading(false);
+      });
+  }, []);
 
   const updateUser = (newUser) => {
     setUser(newUser);
-    sessionStorage.setItem("user", JSON.stringify(newUser));
   };
+
+  if (isUserLoading) return null;
 
   return (
     <UserStateContext.Provider value={user}>

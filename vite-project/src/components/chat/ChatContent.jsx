@@ -27,8 +27,10 @@ const ChatContent = () => {
     
     apiClient
       .get("/api/messages", {
-        params: { channelId: selectedChannel?.channelId },
-        size: messageList.size,
+        params: { 
+          channelId: selectedChannel?.channelId,
+          size: messageList.size
+        }
       })
       .then((res) => {
         setMessageList(res?.data);

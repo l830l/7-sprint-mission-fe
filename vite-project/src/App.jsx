@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -9,9 +9,13 @@ import { Link, Routes, Route, Navigate } from "react-router-dom";
 import FindId from "./components/pages/FindId";
 import FindPassword from "./components/pages/FindPassword";
 import SignUp from "./components/pages/SignUp";
+import api from "./api/axiosInstancs";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    api.get("/api/auth/csrf-token");
+  }, []);
 
   return (
     <>
